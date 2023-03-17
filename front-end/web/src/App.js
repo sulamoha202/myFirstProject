@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  console.log("Hello!")
+  const requestBody = {
+      "username":"Sulayman",
+      "password":"123456789"
+  }
+  fetch("api/auth/login", {
+    "headers": {
+      "content-type" : "application/json"
+    },
+    "method":"POST",
+    "body" : JSON.stringify(requestBody)
+  })
+    .then((res) =>{
+    return Promise.all([res.json(),res.headers]);
+  })
+    .then(([body,headers]) =>{
+      const autValue = headers.get("authorization")
+      console.log(autValue);
+      console.log(body);
+    } );
+   
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <h1>Hello World!</h1> 
     </div>
   );
 }
