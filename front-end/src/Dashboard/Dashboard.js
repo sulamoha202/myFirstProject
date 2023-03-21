@@ -1,13 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import useLocalState from '../util/useLocalStorage';
 
 const Dashboard = () => {
     const [jwt,setJwt] = useLocalState("","jwt");
+    function createAssignement(){
+        fetch("api/assignemnts",{
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization": `Bearer ${jwt}`
+            },
+            method:"POST"
+        }).then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        }).then((data)=>{
+            console.log(data);
+        })
+    }
     return (
-        <div>
-            <h1>Hello World</h1>
-            <div>JWT Value is {jwt}</div>
+        <div style={{margin:'2em'}}>
+            <button onClick={()=>{createAssignement()}}>Submit New Assignement</button>
         </div>
     );
 };

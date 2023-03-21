@@ -20,7 +20,7 @@ public class JwtUtil implements Serializable{
 	public static final long JWT_TOKEN_VALIDITY = 2592000; //this number is in seconds equals to 30*24 *60*60 one Month;
 	
 	@Value("${jwt.secret}")
-	private String secret;	
+	private String secret;
 	
 	public String getUsernameFormToken(String token) {
 		

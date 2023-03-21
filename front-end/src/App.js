@@ -4,11 +4,13 @@ import './App.css';
 import useLocalState from './util/useLocalStorage';
 import Dashboard from './Dashboard/Dashboard';
 import HomePage from './Homepage/HomePage';
+import Login from './Login/Login';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 function App() {
 
   const [jwt,setJwt] = useLocalState("","jwt");
-  
+ /* 
   useEffect(()=>{
     if(!jwt){
       const requestBody = {
@@ -29,13 +31,20 @@ function App() {
         });
     }
   }, );
-
+*/
   useEffect(()=>{
-    console.log(`Jwt is: ${jwt}`);
+    //console.log(`Jwt is: ${jwt}`);
   },[jwt])
   return (
     <Routes>
-      <Route path="/dashboard" element={<Dashboard/>}/>
+
+      <Route path="/dashboard" element={
+          <PrivateRoute>
+            <Dashboard/>
+          </PrivateRoute>
+        }
+      />
+      <Route path="/login" element={<Login/>}/>
       <Route path="/" element={<HomePage/>}/>
     </Routes>
       );
