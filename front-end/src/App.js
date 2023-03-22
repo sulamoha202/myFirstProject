@@ -6,34 +6,13 @@ import Dashboard from './Dashboard/Dashboard';
 import HomePage from './Homepage/HomePage';
 import Login from './Login/Login';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import AssignmentView from './AssignmentView/AssignmentView';
 
 function App() {
 
   const [jwt,setJwt] = useLocalState("","jwt");
- /* 
+
   useEffect(()=>{
-    if(!jwt){
-      const requestBody = {
-          "username":"Sulayman",
-          "password":"123456789"
-      };
-    
-      fetch("api/auth/login", {
-        "headers": {
-          "content-type" : "application/json"
-        },
-        "method":"POST",
-        "body" : JSON.stringify(requestBody)
-      })
-        .then((res) => Promise.all([res.json(),res.headers]))
-        .then(([body,headers]) =>{
-          setJwt(headers.get("authorization"))
-        });
-    }
-  }, );
-*/
-  useEffect(()=>{
-    //console.log(`Jwt is: ${jwt}`);
   },[jwt])
   return (
     <Routes>
@@ -44,6 +23,11 @@ function App() {
           </PrivateRoute>
         }
       />
+      <Route path="/assignments/:id" element={
+        <PrivateRoute>
+          <AssignmentView/>
+      </PrivateRoute>
+      }/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/" element={<HomePage/>}/>
     </Routes>

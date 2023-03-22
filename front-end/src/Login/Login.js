@@ -20,7 +20,7 @@ const Login = () => {
               "body" : JSON.stringify(reqBody)
             })
               .then((res) => {
-                if(res.status == 200){
+                if(res.status === 200){
                   return Promise.all([res.json(),res.headers]);
                 }else{
                   return Promise.reject("Invalid login request");
