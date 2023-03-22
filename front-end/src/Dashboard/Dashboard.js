@@ -45,7 +45,7 @@ const Dashboard = () => {
                 assignments.map((assignments) =>(
                     <div>
                         <Link to={`/assignments/${assignments.id}`}>
-                            assignemnt ID: {assignments.id}
+                            Assignemnt ID: {assignments.id}
                         </Link>
                     </div>
             ))
