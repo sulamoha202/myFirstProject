@@ -36,16 +36,16 @@ public class AuthController {
 	                        request.getUsername(), request.getPassword()
 	                    )
 	                );
-
+	            
 	            User user = (User) authenticate.getPrincipal();
 	            user.setPassword(null);
+	            //System.out.println(request.getUsername()+" : "+request.getPassword());
 	            return ResponseEntity.ok()
 	                .header(
 	                    HttpHeaders.AUTHORIZATION,
 	                    jwtUtil.generateToken(user)
 	                )
 	                .body(user);
-	            
 	        } catch (BadCredentialsException ex) {
 	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	        }
